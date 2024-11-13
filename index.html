@@ -54,9 +54,9 @@
             </div>
         </div>
 
-        <form id="guessInput">
+        <form id="guessInput" onkeydown="return event.key != 'Enter';">
             Guess: <input type="text" name="guess" value=""><br>
-          </form> 
+        </form> 
 
         <button onclick="submitGuess()">Submit</button>
     </body>

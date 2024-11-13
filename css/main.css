@@ -13,6 +13,7 @@ canvas {
     border: 2px solid black;
     padding: 5px;
     margin: 5px;
+    text-align: center;
 }
 .correct {
     display: inline-block;
@@ -22,6 +23,7 @@ canvas {
     border: 2px solid black;
     padding: 5px;
     margin: 5px;
+    text-align: center;
 }
 .incorrect {
     display: inline-block;
@@ -31,6 +33,7 @@ canvas {
     border: 2px solid black;
     padding: 5px;
     margin: 5px;
+    text-align: center;
 }
 .somewhereElse {
     display: inline-block;
@@ -40,4 +43,5 @@ canvas {
     border: 2px solid black;
     padding: 5px;
     margin: 5px;
+    text-align: center;
 }
