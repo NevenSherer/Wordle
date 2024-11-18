@@ -16,10 +16,10 @@ function submitGuess() {
     for (var i = 0; i < inputFrame.length; i++) {
         if (inputFrame.elements[i].length = 5){
             guess += inputFrame.elements[i].value;
+            guess = guess.toUpperCase();
         }
     }
     if (validGuesses.indexOf(guess) > -1) {
-        guess = guess.toUpperCase();
         for (var i = 0; i < guess.length; i++) {
             if (guess.charAt(i) == correctAnswer.charAt(i)) {
                 document.getElementById(guessCount + "-" + (i + 1)).classList.add("correct");
