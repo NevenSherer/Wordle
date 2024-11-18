@@ -21,14 +21,12 @@ function submitGuess() {
         for (var i = 0; i < guess.length; i++) {
             if (guess.charAt(i) == correctAnswer.charAt(i)) {
                 document.getElementById(guessCount + "-" + (i + 1)).classList.add("correct");
-                document.getElementById(guessCount + "-" + (i+ 1)).classList.remove("default");
                 document.getElementById(guessCount + "-" + (i + 1)).innerText = guess.charAt(i);
             }
             else {
                 for (var j = 0; j < guess.length; j++) {
                     if (guess.charAt(i) == correctAnswer.charAt(j)) {
                         document.getElementById(guessCount + "-" + (i+ 1)).classList.add("somewhereElse");
-                        document.getElementById(guessCount + "-" + (i+ 1)).classList.remove("default");
                         document.getElementById(guessCount + "-" + (i + 1)).innerText = guess.charAt(i);
                     }
                 }
