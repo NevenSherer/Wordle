@@ -21,7 +21,7 @@ canvas {
     position: relative;
     top: 50%;
     left: 50%;
-    transform: translate(-333%, 0%);
+    transform: translate(-300%, 0%);
     vertical-align: middle;
 }
 .default {
