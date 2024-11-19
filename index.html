@@ -57,7 +57,7 @@
         <!--<form id="guessInput" onkeydown="return event.key != 'Enter';" autocomplete="off">
             Guess: <input type="text" name="guess" value=""><br>
         </form> -->
-        <input type="text" name="guess" value="" id="guessInput">
+        <input type="text" name="guess" value="" id="guessInput" onchange="submitGuess()">
 
         <button onclick="submitGuess()">Submit</button>
     </body>

@@ -17,6 +17,7 @@ defineAnswers();
 var correctAnswer = possibleAnswers[Math.floor(Math.random() * possibleAnswers.length)];
 correctAnswer = correctAnswer.toUpperCase();
 var guessCount = 1;
+var guesses = ["does not count as a guess"];
 
 function submitGuess() {
     var guess;
@@ -25,26 +26,30 @@ function submitGuess() {
     guess = guess.toUpperCase();
     if (guess.length == 5) {
         if (validGuesses.indexOf(guess) > -1) {
-            for (var i = 0; i < guess.length; i++) {
-                if (guess.charAt(i) == correctAnswer.charAt(i)) {
-                    document.getElementById(guessCount + "-" + (i + 1)).classList.add("correct");
-                    document.getElementById(guessCount + "-" + (i + 1)).innerText = guess.charAt(i);
-                }
-                else {
-                    for (var j = 0; j < guess.length; j++) {
-                        if (guess.charAt(i) == correctAnswer.charAt(j)) {
-                            document.getElementById(guessCount + "-" + (i + 1)).classList.add("somewhereElse");
-                            document.getElementById(guessCount + "-" + (i + 1)).innerText = guess.charAt(i);
+            if (guesses.indexOf(guess) == -1) {
+                for (var i = 0; i < guess.length; i++) {
+                    if (guess.charAt(i) == correctAnswer.charAt(i)) {
+                        document.getElementById(guessCount + "-" + (i + 1)).classList.add("correct");
+                        document.getElementById(guessCount + "-" + (i + 1)).innerText = guess.charAt(i);
+                    }
+                    else {
+                        for (var j = 0; j < guess.length; j++) {
+                            if (guess.charAt(i) == correctAnswer.charAt(j)) {
+                                document.getElementById(guessCount + "-" + (i + 1)).classList.add("somewhereElse");
+                                document.getElementById(guessCount + "-" + (i + 1)).innerText = guess.charAt(i);
+                            }
+                        }
+                        for (var j = 0; j < guess.length; j++) {
+                            if (document.getElementById(guessCount + "-" + (i + 1)).classList.contains("default")) {
+                                document.getElementById(guessCount + "-" + (i + 1)).innerText = guess.charAt(i);
+                            }
                         }
                     }
-                    for (var j = 0; j < guess.length; j++) {
-                        if (document.getElementById(guessCount + "-" + (i + 1)).classList.contains("default")) {
-                            document.getElementById(guessCount + "-" + (i + 1)).innerText = guess.charAt(i);
-                        }
-                    }
                 }
+                guessCount++;
+                guesses.push(guess);
+                document.getElementById("guessInput").value = "";
             }
-            guessCount++;
         }
     }
 }
