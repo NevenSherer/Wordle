@@ -14,7 +14,9 @@ canvas {
     display: inline-block;
     width: 50px;
     height: 50px;
-    border-radius: 10px;
+    line-height: 50px;
+    border-width: 3px;
+    border-style: solid;
     padding: 5px;
     margin: 5px;
     text-align: center;
@@ -23,18 +25,26 @@ canvas {
     left: 50%;
     transform: translate(-300%, 0%);
     vertical-align: middle;
+    font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 750;
+    color: #FFFFFF;
+    font-size: 17px;
 }
 .default {
-    background-color: rgb(175, 175, 175);
+    background-color: #FFFFFF;
+    border-color: #D3D6DA;
 }
 .correct {
-    background-color: green;
+    background-color: #6AAA64;
+    border-color: #6AAA64;
 }
 .incorrect {
-    background-color: gray;
+    background-color: #787C7E;
+    border-color: #787C7E;
 }
 .somewhereElse {
-    background-color: rgb(234, 234, 22);
+    background-color: #C9B458;
+    border-color: #C9B458;
 }
 input {
     width: 200;
@@ -57,4 +67,18 @@ button {
     color: whitesmoke;
     border: 0px;
     border-radius: 10px;
+}
+.resultCard {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 500px;
+    background-color: #FFFFFF;
+    text-align: center;
+    font: 300;
+}
+.hidden {
+    display: none;
 }
