@@ -15,6 +15,7 @@ function defineAnswers() {
     for (var i = 0; i < possibleAnswers.length; i++) {
         possibleAnswers[i] = possibleAnswers[i].toUpperCase();
     }
+
 }
 defineAnswers();
 
@@ -62,16 +63,47 @@ function submitGuess() {
         }
     }
     if (guess == correctAnswer) {
-        numberOfGuesses.push(guessCount);
+        numberOfGuesses.push(guessCount - 1);
         correct++;
-        answerGuessed();
+        gameEnd();
     }
 }
 
-function answerGuessed() {
-    guessCount = 10;
-    document.getElementById("resultCard").classList.toggle("hidden")
-    document.getElementById("gamesPlayed").value = attempts;
-    document.getElementById("winRate").value = ((correct / attempts) * 100) + "%";
-    document.getElementById("averageGuesses").value = 
+function gameEnd() {
+	var temp;
+	temp = attempts;
+    document.getElementById("gamesPlayed").innerText = String(temp);
+	temp = (correct / attempts) * 100;
+    document.getElementById("winRate").innerText = String(temp) + "%";
+	var totalGuesses = 0;
+	for (var i = 0; i < numberOfGuesses.length; i++) {
+		totalGuesses += numberOfGuesses[i];
+	}
+	temp = totalGuesses / attempts;
+    document.getElementById("averageGuesses").innerText = String(temp);
+    document.getElementById("resultCard").classList.toggle("hidden");
+	attempts++;
+}
+
+function newGame() {
+	for (var i = 0; i < 6; i++) {
+		for (var j = 0; j < 5; j++) {
+			if (document.getElementById((i + 1) + "-" + (j + 1)).classList.contains("incorrect")) {
+            	document.getElementById((i + 1) + "-" + (j + 1)).classList.remove ("incorrect");
+            }
+			if (document.getElementById((i + 1) + "-" + (j + 1)).classList.contains("correct")) {
+            	document.getElementById((i + 1) + "-" + (j + 1)).classList.remove("correct");
+            }
+			if (document.getElementById((i + 1) + "-" + (j + 1)).classList.contains("somewhereElse")) {
+            	document.getElementById((i + 1) + "-" + (j + 1)).classList.remove("somewhereElse");
+            }
+			document.getElementById((i + 1) + "-" + (j + 1)).innerText = "";
+		}
+	}
+	document.getElementById("resultCard").classList.toggle("hidden");
+	guesses = [];
+	guessCount = 1;
+	correctAnswer = possibleAnswers[Math.floor(Math.random() * possibleAnswers.length)];
+	correctAnswer = correctAnswer.toUpperCase();
+	guesses = ["does not count as a guess"];
 }
