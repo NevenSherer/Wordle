@@ -19,6 +19,8 @@ function defineAnswers() {
 }
 defineAnswers();
 
+const round = (number, decimal) => Math.round(number * 10**decimal)/10**decimal;
+
 var correctAnswer = possibleAnswers[Math.floor(Math.random() * possibleAnswers.length)];
 correctAnswer = correctAnswer.toUpperCase();
 var guessCount = 1;
@@ -67,6 +69,9 @@ function submitGuess() {
         correct++;
         gameEnd();
     }
+    else if (guessCount > 6) {
+        gameEnd();
+    }
 }
 
 function gameEnd() {
@@ -74,14 +79,16 @@ function gameEnd() {
 	temp = attempts;
     document.getElementById("gamesPlayed").innerText = String(temp);
 	temp = (correct / attempts) * 100;
+    temp = round(temp, 1);
     document.getElementById("winRate").innerText = String(temp) + "%";
 	var totalGuesses = 0;
 	for (var i = 0; i < numberOfGuesses.length; i++) {
 		totalGuesses += numberOfGuesses[i];
 	}
-	temp = totalGuesses / attempts;
+	temp = totalGuesses / correct;
+    temp = round(temp, 1);
     document.getElementById("averageGuesses").innerText = String(temp);
-    document.getElementById("resultCard").classList.toggle("hidden");
+    toggleHidden("resultCard");
 	attempts++;
 }
 
@@ -100,10 +107,14 @@ function newGame() {
 			document.getElementById((i + 1) + "-" + (j + 1)).innerText = "";
 		}
 	}
-	document.getElementById("resultCard").classList.toggle("hidden");
+	toggleHidden("resultCard");
 	guesses = [];
 	guessCount = 1;
 	correctAnswer = possibleAnswers[Math.floor(Math.random() * possibleAnswers.length)];
 	correctAnswer = correctAnswer.toUpperCase();
 	guesses = ["does not count as a guess"];
+}
+
+function toggleHidden(target) {
+    document.getElementById(target).classList.toggle("hidden");
 }

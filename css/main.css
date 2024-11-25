@@ -57,7 +57,7 @@ input {
     transform: translate(-50%, 0%);
     border-radius: 10px;
 }
-button {
+.submitGuess {
     width: 100px;
     height: 50px;
     position: relative;
@@ -68,7 +68,17 @@ button {
     border: 0px;
     border-radius: 10px;
 }
-.resultCard {
+.darkenBackground {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    left: 0%;
+    top: 0%;
+    width: 100dvw;
+    height: 100dvh;
+    background-color: rgba(30, 30, 30, 0.25);
+}
+.statPage {
     position: absolute;
     left: 50%;
     top: 50%;
@@ -81,4 +91,20 @@ button {
 }
 .hidden {
     display: none;
+}
+.ui {
+    position: absolute;
+}
+.stats {
+    position: absolute;
+    transform: translate(10px, 10px);
+    left: 100%;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    border: 0px;
+    color: #101010;
+    background-color: rgba(255, 255, 255, 0);
+    font-weight: 750;
 }

@@ -9,6 +9,9 @@
     </head>
     <body>
         <script rel="script" type="text/javascript" src="./js/main.js"></script>
+        <div id="ui" class="ui">
+            <button class="stats" onclick="toggleHidden('resultCard')">Stats</button>
+        </div>
         <div id="letterGrid">
             <div id="guess1">
                 <span class="default constant" id="1-1"> </span>
@@ -54,17 +57,18 @@
             </div>
         </div>
 
-        <!--<form id="guessInput" onkeydown="return event.key != 'Enter';" autocomplete="off">
-            Guess: <input type="text" name="guess" value=""><br>
-        </form> -->
         <input type="text" name="guess" value="" id="guessInput" onchange="submitGuess()">
         <br>
-        <button onclick="submitGuess()">Submit</button>
+        <button class="submitGuess" onclick="submitGuess()">Submit</button>
         <div id="resultCard" class="resultCard hidden">
-            <p id="gamesPlayed">1</p>
-            <p id="winRate">100%</p>
-            <p id="averageGuesses">0</p>
-			<button onclick="newGame()">New Game</button>
+            <div class="darkenBackground"></div>
+            <div class="statPage">
+                <p id="gamesPlayed">1</p>
+                <p id="winRate">100%</p>
+                <p id="averageGuesses">0</p>
+                <button class="newGame" onclick="newGame()">New Game</button>
+                <button class="closeStats" onclick="toggleHidden('resultCard')">X</button>
+            </div>
         </div>
     </body>
 </html>
