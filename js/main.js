@@ -77,17 +77,17 @@ function submitGuess() {
 function gameEnd() {
 	var temp;
 	temp = attempts;
-    document.getElementById("gamesPlayed").innerText = String(temp);
+    document.getElementById("gamesPlayed").innerText = "Games played: " + String(temp);
 	temp = (correct / attempts) * 100;
     temp = round(temp, 1);
-    document.getElementById("winRate").innerText = String(temp) + "%";
+    document.getElementById("winRate").innerText = "Percentage of games won: " + String(temp) + "%";
 	var totalGuesses = 0;
 	for (var i = 0; i < numberOfGuesses.length; i++) {
 		totalGuesses += numberOfGuesses[i];
 	}
 	temp = totalGuesses / correct;
     temp = round(temp, 1);
-    document.getElementById("averageGuesses").innerText = String(temp);
+    document.getElementById("averageGuesses").innerText = "Average guesses: " + String(temp);
     toggleHidden("resultCard");
 	attempts++;
 }

@@ -12,43 +12,43 @@
         <div id="ui" class="ui">
             <button class="stats" onclick="toggleHidden('resultCard')">Stats</button>
         </div>
-        <div id="letterGrid">
-            <div id="guess1">
+        <div class="letterGrid">
+            <div class="guess1 guess">
                 <span class="default constant" id="1-1"> </span>
                 <span class="default constant" id="1-2"> </span>
                 <span class="default constant" id="1-3"> </span>
                 <span class="default constant" id="1-4"> </span>
                 <span class="default constant" id="1-5"> </span>
             </div>
-            <div id="guess2">
+            <div class="guess2 guess">
                 <span class="default constant" id="2-1"> </span>
                 <span class="default constant" id="2-2"> </span>
                 <span class="default constant" id="2-3"> </span>
                 <span class="default constant" id="2-4"> </span>
                 <span class="default constant" id="2-5"> </span>
             </div>
-            <div id="guess3">
+            <div class="guess3 guess">
                 <span class="default constant" id="3-1"> </span>
                 <span class="default constant" id="3-2"> </span>
                 <span class="default constant" id="3-3"> </span>
                 <span class="default constant" id="3-4"> </span>
                 <span class="default constant" id="3-5"> </span>
             </div>
-            <div id="guess4">
+            <div class="guess4 guess">
                 <span class="default constant" id="4-1"> </span>
                 <span class="default constant" id="4-2"> </span>
                 <span class="default constant" id="4-3"> </span>
                 <span class="default constant" id="4-4"> </span>
                 <span class="default constant" id="4-5"> </span>
             </div>
-            <div id="guess5">
+            <div class="guess5 guess">
                 <span class="default constant" id="5-1"> </span>
                 <span class="default constant" id="5-2"> </span>
                 <span class="default constant" id="5-3"> </span>
                 <span class="default constant" id="5-4"> </span>
                 <span class="default constant" id="5-5"> </span>
             </div>
-            <div id="guess6">
+            <div class="guess6 guess">
                 <span class="default constant" id="6-1"> </span>
                 <span class="default constant" id="6-2"> </span>
                 <span class="default constant" id="6-3"> </span>
@@ -63,9 +63,9 @@
         <div id="resultCard" class="resultCard hidden">
             <div class="darkenBackground"></div>
             <div class="statPage">
-                <p id="gamesPlayed">1</p>
-                <p id="winRate">100%</p>
-                <p id="averageGuesses">0</p>
+                <p id="gamesPlayed">Games played: 1</p>
+                <p id="winRate">Percentage of games won: 100%</p>
+                <p id="averageGuesses">Average guesses: 0</p>
                 <button class="newGame" onclick="newGame()">New Game</button>
                 <button class="closeStats" onclick="toggleHidden('resultCard')">X</button>
             </div>

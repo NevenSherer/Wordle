@@ -1,7 +1,8 @@
 html, body {
     width: 100%;
     height: 100%;
-    margin: 0 auto;
+    margin: 0 0;
+    overflow-x: hidden;
 }
 canvas {
     display: block;
@@ -9,26 +10,28 @@ canvas {
 .letterGrid {
     width: 100%;
     height: 100%;
+    position: absolute;
 }
 .default, .correct, .incorrect, .somewhereElse {
     display: inline-block;
-    width: 50px;
-    height: 50px;
-    line-height: 50px;
-    border-width: 3px;
+    width: 5dvw;
+    height: 5dvw;
+    line-height: 8%;
+    border-width: 0.25dvw;
     border-style: solid;
-    padding: 5px;
-    margin: 5px;
+    margin: 0.375dvw;
     text-align: center;
     position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-300%, 0%);
     vertical-align: middle;
     font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
     font-weight: 750;
     color: #FFFFFF;
-    font-size: 17px;
+    font-size: 4%;
+}
+.guess {
+    position: relative;
+    width: 50%;
+    left: 25%
 }
 .default {
     background-color: #FFFFFF;
@@ -47,8 +50,8 @@ canvas {
     border-color: #C9B458;
 }
 input {
-    width: 200;
-    height: 30px;
+    width: 20dvw;
+    height: 5dvw;
     font-size: large;
     text-align: center;
     color: black;
@@ -83,8 +86,8 @@ input {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 500px;
-    height: 500px;
+    width: 50%;
+    height: 50%;
     background-color: #FFFFFF;
     text-align: center;
     font: 300;
@@ -93,15 +96,17 @@ input {
     display: none;
 }
 .ui {
-    position: absolute;
+    position: relative;
+    width: 100dvw;
+    height: 100dvh;
+    text-align: center;
 }
 .stats {
     position: absolute;
-    transform: translate(10px, 10px);
-    left: 100%;
-    width: 50px;
-    height: 50px;
-    line-height: 50px;
+    width: 5dvw;
+    height: 5dvw;
+    line-height: 5dvw;
+    font-size: 2dvw;
     text-align: center;
     border: 0px;
     color: #101010;
