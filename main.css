@@ -199,6 +199,11 @@ canvas {
 .spacer {
     flex: 0.5;
 }
+.closeMenu {
+    position: absolute;
+    left: 100%;
+    transform: translate(-100%);
+}
 .flip {
     animation: flip 500ms ease forwards;
 }
