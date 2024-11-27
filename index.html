@@ -10,59 +10,158 @@
     <body>
         <script rel="script" type="text/javascript" src="./js/main.js"></script>
         <div id="ui" class="ui">
-            <button class="stats" onclick="toggleHidden('resultCard')">Stats</button>
+            <button class="menu" onclick="toggleHidden('resultCard')">Menu</button>
         </div>
-        <div class="letterGrid">
-            <div class="guess1 guess">
-                <span class="default constant" id="1-1"> </span>
-                <span class="default constant" id="1-2"> </span>
-                <span class="default constant" id="1-3"> </span>
-                <span class="default constant" id="1-4"> </span>
-                <span class="default constant" id="1-5"> </span>
+        <div class="game">
+            <div class="centerLetterGrid">
+                <div class="letterGrid">
+                    <div class="guess1 guess">
+                        <div class="default row" id="1-1">
+                            <span class="letters" id="1-1"></span>
+                        </div>
+                        <div class="default row" id="1-2">
+                            <span class="letters" id="1-2"></span>
+                        </div>
+                        <div class="default row" id="1-3">
+                            <span class="letters" id="1-3"></span>
+                        </div>
+                        <div class="default row" id="1-4">
+                            <span class="letters" id="1-4"></span>
+                        </div>
+                        <div class="default row" id="1-5">
+                            <span class="letters" id="1-5"></span>
+                        </div>
+                    </div>
+                    <div class="guess2 guess">
+                        <div class="default row" id="2-1">
+                            <span class="letters" id="2-1"></span>
+                        </div>
+                        <div class="default row" id="2-2">
+                            <span class="letters" id="2-2"></span>
+                        </div>
+                        <div class="default row" id="2-3">
+                            <span class="letters" id="2-3"></span>
+                        </div>
+                        <div class="default row" id="2-4">
+                            <span class="letters" id="2-4"></span>
+                        </div>
+                        <div class="default row" id="2-5">
+                            <span class="letters" id="2-5"></span>
+                        </div>
+                    </div>
+                    <div class="guess3 guess">
+                        <div class="default row" id="3-1">
+                            <span class="letters" id="3-1"></span>
+                        </div>
+                        <div class="default row" id="3-2">
+                            <span class="letters" id="3-2"></span>
+                        </div>
+                        <div class="default row" id="3-3">
+                            <span class="letters" id="3-3"></span>
+                        </div>
+                        <div class="default row" id="3-4">
+                            <span class="letters" id="3-4"></span>
+                        </div>
+                        <div class="default row" id="3-5">
+                            <span class="letters" id="3-5"></span>
+                        </div>
+                    </div>
+                    <div class="guess4 guess">
+                        <div class="default row" id="4-1">
+                            <span class="letters" id="4-1"></span>
+                        </div>
+                        <div class="default row" id="4-2">
+                            <span class="letters" id="4-2"></span>
+                        </div>
+                        <div class="default row" id="4-3">
+                            <span class="letters" id="4-3"></span>
+                        </div>
+                        <div class="default row" id="4-4">
+                            <span class="letters" id="4-4"></span>
+                        </div>
+                        <div class="default row" id="4-5">
+                            <span class="letters" id="4-5"></span>
+                        </div>
+                    </div>
+                    <div class="guess5 guess">
+                        <div class="default row" id="5-1">
+                            <span class="letters" id="5-1"></span>
+                        </div>
+                        <div class="default row" id="5-2">
+                            <span class="letters" id="5-2"></span>
+                        </div>
+                        <div class="default row" id="5-3">
+                            <span class="letters" id="5-3"></span>
+                        </div>
+                        <div class="default row" id="5-4">
+                            <span class="letters" id="5-4"></span>
+                        </div>
+                        <div class="default row" id="5-5">
+                            <span class="letters" id="5-5"></span>
+                        </div>
+                    </div>
+                    <div class="guess6 guess">
+                        <div class="default row" id="6-1">
+                            <span class="letters" id="6-1"></span>
+                        </div>
+                        <div class="default row" id="6-2">
+                            <span class="letters" id="6-2"></span>
+                        </div>
+                        <div class="default row" id="6-3">
+                            <span class="letters" id="6-3"></span>
+                        </div>
+                        <div class="default row" id="6-4">
+                            <span class="letters" id="6-4"></span>
+                        </div>
+                        <div class="default row" id="6-5">
+                            <span class="letters" id="6-5"></span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="guess2 guess">
-                <span class="default constant" id="2-1"> </span>
-                <span class="default constant" id="2-2"> </span>
-                <span class="default constant" id="2-3"> </span>
-                <span class="default constant" id="2-4"> </span>
-                <span class="default constant" id="2-5"> </span>
-            </div>
-            <div class="guess3 guess">
-                <span class="default constant" id="3-1"> </span>
-                <span class="default constant" id="3-2"> </span>
-                <span class="default constant" id="3-3"> </span>
-                <span class="default constant" id="3-4"> </span>
-                <span class="default constant" id="3-5"> </span>
-            </div>
-            <div class="guess4 guess">
-                <span class="default constant" id="4-1"> </span>
-                <span class="default constant" id="4-2"> </span>
-                <span class="default constant" id="4-3"> </span>
-                <span class="default constant" id="4-4"> </span>
-                <span class="default constant" id="4-5"> </span>
-            </div>
-            <div class="guess5 guess">
-                <span class="default constant" id="5-1"> </span>
-                <span class="default constant" id="5-2"> </span>
-                <span class="default constant" id="5-3"> </span>
-                <span class="default constant" id="5-4"> </span>
-                <span class="default constant" id="5-5"> </span>
-            </div>
-            <div class="guess6 guess">
-                <span class="default constant" id="6-1"> </span>
-                <span class="default constant" id="6-2"> </span>
-                <span class="default constant" id="6-3"> </span>
-                <span class="default constant" id="6-4"> </span>
-                <span class="default constant" id="6-5"> </span>
+            <br>
+            <div class="onScreenKeyboard">
+                <div class="row1">
+                    <button onclick="screenKeyboardInput('Q')" class="keyboardLetters" id="Q" tabindex="-1">Q</button>
+                    <button onclick="screenKeyboardInput('W')" class="keyboardLetters" id="W" tabindex="-1">W</button>
+                    <button onclick="screenKeyboardInput('E')" class="keyboardLetters" id="E" tabindex="-1">E</button>
+                    <button onclick="screenKeyboardInput('R')" class="keyboardLetters" id="R" tabindex="-1">R</button>
+                    <button onclick="screenKeyboardInput('T')" class="keyboardLetters" id="T" tabindex="-1">T</button>
+                    <button onclick="screenKeyboardInput('Y')" class="keyboardLetters" id="Y" tabindex="-1">Y</button>
+                    <button onclick="screenKeyboardInput('U')" class="keyboardLetters" id="U" tabindex="-1">U</button>
+                    <button onclick="screenKeyboardInput('I')" class="keyboardLetters" id="I" tabindex="-1">I</button>
+                    <button onclick="screenKeyboardInput('O')" class="keyboardLetters" id="O" tabindex="-1">O</button>
+                    <button onclick="screenKeyboardInput('P')" class="keyboardLetters" id="P" tabindex="-1">P</button>
+                </div>
+                <div class="row2">
+                    <div class="spacer"></div>
+                    <button onclick="screenKeyboardInput('A')" class="keyboardLetters" id="A" tabindex="-1">A</button>
+                    <button onclick="screenKeyboardInput('S')" class="keyboardLetters" id="S" tabindex="-1">S</button>
+                    <button onclick="screenKeyboardInput('D')" class="keyboardLetters" id="D" tabindex="-1">D</button>
+                    <button onclick="screenKeyboardInput('F')" class="keyboardLetters" id="F" tabindex="-1">F</button>
+                    <button onclick="screenKeyboardInput('G')" class="keyboardLetters" id="G" tabindex="-1">G</button>
+                    <button onclick="screenKeyboardInput('H')" class="keyboardLetters" id="H" tabindex="-1">H</button>
+                    <button onclick="screenKeyboardInput('J')" class="keyboardLetters" id="J" tabindex="-1">J</button>
+                    <button onclick="screenKeyboardInput('K')" class="keyboardLetters" id="K" tabindex="-1">K</button>
+                    <button onclick="screenKeyboardInput('L')" class="keyboardLetters" id="L" tabindex="-1">L</button>
+                    <div class="spacer"></div>
+                </div>
+                <div class="row3">
+                    <button onclick="screenKeyboardInput('Enter')" class="specialButtons" tabindex="-1">Enter</button>
+                    <button onclick="screenKeyboardInput('Z')" class="keyboardLetters" id="Z" tabindex="-1">Z</button>
+                    <button onclick="screenKeyboardInput('X')" class="keyboardLetters" id="X" tabindex="-1">X</button>
+                    <button onclick="screenKeyboardInput('C')" class="keyboardLetters" id="C" tabindex="-1">C</button>
+                    <button onclick="screenKeyboardInput('V')" class="keyboardLetters" id="V" tabindex="-1">V</button>
+                    <button onclick="screenKeyboardInput('B')" class="keyboardLetters" id="B" tabindex="-1">B</button>
+                    <button onclick="screenKeyboardInput('N')" class="keyboardLetters" id="N" tabindex="-1">N</button>
+                    <button onclick="screenKeyboardInput('M')" class="keyboardLetters" id="M" tabindex="-1">M</button>
+                    <button onclick="screenKeyboardInput('Backspace')" class="specialButtons" tabindex="-1"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" width="20"><path fill="#000" d="M22 3H7c-.69 0-1.23.35-1.59.88L0 12l5.41 8.11c.36.53.9.89 1.59.89h15c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H7.07L2.4 12l4.66-7H22v14zm-11.59-2L14 13.41 17.59 17 19 15.59 15.41 12 19 8.41 17.59 7 14 10.59 10.41 7 9 8.41 12.59 12 9 15.59z"></path></svg></button>
+                </div>
             </div>
         </div>
-
-        <input type="text" name="guess" value="" id="guessInput" onchange="submitGuess()">
-        <br>
-        <button class="submitGuess" onclick="submitGuess()">Submit</button>
         <div id="resultCard" class="resultCard hidden">
             <div class="darkenBackground"></div>
-            <div class="statPage">
+            <div class="menuPage">
                 <p id="gamesPlayed">Games played: 1</p>
                 <p id="winRate">Percentage of games won: 100%</p>
                 <p id="averageGuesses">Average guesses: 0</p>

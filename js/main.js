@@ -25,17 +25,80 @@ var correctAnswer = possibleAnswers[Math.floor(Math.random() * possibleAnswers.l
 correctAnswer = correctAnswer.toUpperCase();
 var guessCount = 1;
 var guesses = ["does not count as a guess"];
+const guessInput = document.getElementById("guessInput");
+
+var guess = "";
+window.addEventListener('keydown', (event) => {
+    const inputChar = event.key;
+    
+    if (inputChar == 'Backspace') {
+        guess = guess.slice(0, -1);
+    }
+    else if (inputChar == 'Enter') {
+        if (guess.length == 5) {
+            submitGuess();
+        }
+    }
+    else if (inputChar.length == 1 && guess.length < 5 && inputChar !== " ") {
+        guess += inputChar.toUpperCase();
+    }
+
+    updateLetters();
+});
+
+function screenKeyboardInput(button) {
+    if (button == 'Backspace') {
+        guess = guess.slice(0, -1);
+    }
+    else if (button == 'Enter') {
+        if (guess.length == 5) {
+            submitGuess();
+        }
+    }
+    else if (button.length == 1 && guess.length < 5 && button !== " ") {
+        guess += button.toUpperCase();
+    }
+
+    updateLetters();
+    console.log(button);
+}
+
+function updateLetters() {
+    for (var i = 0; i < 5; i++) {
+        const element = document.getElementById(guessCount + "-" + (i + 1));
+        if (element) {
+            element.innerText = String(guess.charAt(i));
+        }
+    }
+}
 
 function submitGuess() {
-    var guess;
-    //guess = document.getElementById("guessInput").elements[0].text;
-    guess = document.getElementById("guessInput").value;
-    guess = guess.toUpperCase();
     if (guess.length == 5) {
         if (validGuesses.indexOf(guess) > -1) {
             if (guesses.indexOf(guess) == -1) {
-                for (var i = 0; i < 5; i++){
-                    document.getElementById(guessCount + "-" + (i + 1)).classList.add("incorrect");
+                for (var i = 0; i < 5; i++) {
+                    if (!document.getElementById(String(guess.charAt(i).toUpperCase()) + "").classList.contains("keyboardLetterCorrect") && !document.getElementById(String(guess.charAt(i).toUpperCase()) + "").classList.contains("keyboardLetterIncorrect")) {
+                        document.getElementById(String(guess.charAt(i).toUpperCase()) + "").classList.add("keyboardLetterIncorrect")
+                    }
+                }
+                for (var i = 0; i < 5; i++) {
+                    if (guess.charAt(i) == correctAnswer.charAt(i)) {
+                        document.getElementById(String(guess.charAt(i).toUpperCase()) + "").classList.add("keyboardLetterCorrect");
+                        document.getElementById(String(guess.charAt(i).toUpperCase()) + "").classList.remove("keyboardLetterIncorrect");
+                        document.getElementById(String(guess.charAt(i).toUpperCase()) + "").classList.remove("keyboardLetterSomewhereElse");
+                    }
+                    else {
+                        for (var j = 0; j < 5; j++) {
+                            if (guess.charAt(i) == correctAnswer.charAt(j) && !document.getElementById(String(correctAnswer.charAt(i).toUpperCase()) + "").classList.contains("keyboardLetterCorrect")) {
+                                document.getElementById(String(guess.charAt(i).toUpperCase()) + "").classList.add("keyboardLetterSomewhereElse");
+                                document.getElementById(String(guess.charAt(i).toUpperCase()) + "").classList.remove("keyboardLetterIncorrect");
+                            }
+                        }
+                    }
+                }
+                for (var i = 0; i < 5; i++) {
+                    document.getElementById(guessCount + "-" + (i + 1)).classList.toggle("incorrect");
+                    document.getElementById(guessCount + "-" + (i + 1)).classList.remove("default");
                 }
                 for (var i = 0; i < guess.length; i++) {
                     if (guess.charAt(i) == correctAnswer.charAt(i)) {
@@ -53,6 +116,8 @@ function submitGuess() {
                         }
                         for (var j = 0; j < guess.length; j++) {
                             if (document.getElementById(guessCount + "-" + (i + 1)).classList.contains("default")) {
+                                document.getElementById(guessCount + "-" + (i + 1)).classList.add("incorrect");
+                                document.getElementById(guessCount + "-" + (i + 1)).classList.remove("default");
                                 document.getElementById(guessCount + "-" + (i + 1)).innerText = guess.charAt(i);
                             }
                         }
@@ -60,12 +125,13 @@ function submitGuess() {
                 }
                 guessCount++;
                 guesses.push(guess);
-                document.getElementById("guessInput").value = "";
+                guess = "";
             }
         }
     }
-    if (guess == correctAnswer) {
+    if (guesses[guesses.length - 1] == correctAnswer) {
         numberOfGuesses.push(guessCount - 1);
+        guess = "";
         correct++;
         gameEnd();
     }
@@ -93,6 +159,7 @@ function gameEnd() {
 }
 
 function newGame() {
+	toggleHidden("resultCard");
 	for (var i = 0; i < 6; i++) {
 		for (var j = 0; j < 5; j++) {
 			if (document.getElementById((i + 1) + "-" + (j + 1)).classList.contains("incorrect")) {
@@ -104,10 +171,22 @@ function newGame() {
 			if (document.getElementById((i + 1) + "-" + (j + 1)).classList.contains("somewhereElse")) {
             	document.getElementById((i + 1) + "-" + (j + 1)).classList.remove("somewhereElse");
             }
+            document.getElementById((i + 1) + "-" + (j + 1)).classList.add("default");
 			document.getElementById((i + 1) + "-" + (j + 1)).innerText = "";
 		}
 	}
-	toggleHidden("resultCard");
+    var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+    for (var i = 0; i < 26; i++) {
+        if (document.getElementById(alphabet[i].toUpperCase()).classList.contains("keyboardLetterCorrect")) {
+            document.getElementById(alphabet[i].toUpperCase()).classList.remove("keyboardLetterCorrect");
+        }
+        if (document.getElementById(alphabet[i].toUpperCase()).classList.contains("keyboardLetterIncorrect")) {
+            document.getElementById(alphabet[i].toUpperCase()).classList.remove("keyboardLetterIncorrect");
+        }
+        if (document.getElementById(alphabet[i].toUpperCase()).classList.contains("keyboardLetterSomewhereElse")) {
+            document.getElementById(alphabet[i].toUpperCase()).classList.remove("keyboardLetterSomewhereElse");
+        }
+    }
 	guesses = [];
 	guessCount = 1;
 	correctAnswer = possibleAnswers[Math.floor(Math.random() * possibleAnswers.length)];
@@ -118,3 +197,12 @@ function newGame() {
 function toggleHidden(target) {
     document.getElementById(target).classList.toggle("hidden");
 }
+
+function flipLetter() {
+    var letters = document.getElementsByClassName("guess" + guessCount);
+    var lettersArray = Array.from(letters);
+    lettersArray.map(function (letter, i) {
+      letter.classList.add("flip");
+      letter.style.animationDelay = `${i * 100}ms`;
+    });
+  }
