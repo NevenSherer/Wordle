@@ -28,8 +28,8 @@ canvas {
     grid-gap: 5px;
     position: relative;
     padding: 10px;
-    width: 350px;
-    height: 420px;
+    width: 41.6666dvh;
+    height: 50dvh;
     vertical-align: baseline;
 }
 .row {
