@@ -178,6 +178,34 @@ canvas {
     width: 100%;
     margin: 0 auto 8px;
 }
+.stats {
+    position: relative;
+    display: block;
+}
+.gamesPlayed {
+    flex: 1;
+}
+.winRate {
+    flex: 1;
+}
+.averageGuesses {
+    flex: 1;
+}
+.closeMenu {
+    position: absolute;
+    left: 100%;
+    padding-left: 0px;
+    padding-right: 12px;
+    padding-top: 6px;
+    padding-bottom: 0px;
+    transform: translate(-100%);
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+    font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 2rem;
+    font-weight: 850;
+    z-index: 100;
+}
 .keyboardLetters {
     background-color: #d3d6da;
     font-size: 1.25em;
@@ -198,11 +226,6 @@ canvas {
 }
 .spacer {
     flex: 0.5;
-}
-.closeMenu {
-    position: absolute;
-    left: 100%;
-    transform: translate(-100%);
 }
 .flip {
     animation: flip 500ms ease forwards;

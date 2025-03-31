@@ -162,10 +162,14 @@
         <div id="resultCard" class="resultCard hidden">
             <div class="darkenBackground"></div>
             <div class="menuPage">
-                <button class="closeMenu" onclick="toggleHidden('resultCard')">X</button>
-                <p id="gamesPlayed">Games played: 1</p>
-                <p id="winRate">Percentage of games won: 100%</p>
-                <p id="averageGuesses">Average guesses: 0</p>
+                <div class="topOfMenu">
+                    <button class="closeMenu" onclick="toggleHidden('resultCard')">X</button>
+                </div>
+                <div class="stats">
+                    <p id="gamesPlayed" class="gamesPlayed">Games played: 0</p>
+                    <p id="winRate" class="winRate">Percentage of games won: 100%</p>
+                    <p id="averageGuesses" class="averageGuesses">Average guesses: 0</p>
+                </div>
                 <button class="newGame" onclick="newGame()">New Game</button>
             </div>
         </div>

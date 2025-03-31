@@ -143,7 +143,7 @@ function submitGuess() {
 function gameEnd() {
 	var temp;
 	temp = attempts;
-    document.getElementById("gamesPlayed").innerText = "Games played: " + String(temp);
+    document.getElementById("gamesPlayed").innerText = "Games played: " + String(temp - 1);
 	temp = (correct / attempts) * 100;
     temp = round(temp, 1);
     document.getElementById("winRate").innerText = "Percentage of games won: " + String(temp) + "%";
