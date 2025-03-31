@@ -1,6 +1,6 @@
 var validGuesses;
 var possibleAnswers;
-var attempts = 1;
+var attempt = 1;
 var correct = 0;
 var numberOfGuesses = [];
 var winRate;
@@ -19,7 +19,12 @@ function defineAnswers() {
 }
 defineAnswers();
 
-const round = (number, decimal) => Math.round(number * 10**decimal)/10**decimal;
+function round(number, decimals) {
+    var result = Math.round(number * 10**decimals);
+    result = result / 10**decimals;
+
+    return result;
+}
 
 var correctAnswer = possibleAnswers[Math.floor(Math.random() * possibleAnswers.length)];
 correctAnswer = correctAnswer.toUpperCase();
@@ -142,20 +147,25 @@ function submitGuess() {
 
 function gameEnd() {
 	var temp;
-	temp = attempts;
-    document.getElementById("gamesPlayed").innerText = "Games played: " + String(temp - 1);
-	temp = (correct / attempts) * 100;
+	temp = attempt;
+    document.getElementById("gamesPlayed").innerText = "Games played: " + String(temp);
+	temp = (correct / attempt) * 100;
     temp = round(temp, 1);
     document.getElementById("winRate").innerText = "Percentage of games won: " + String(temp) + "%";
 	var totalGuesses = 0;
 	for (var i = 0; i < numberOfGuesses.length; i++) {
 		totalGuesses += numberOfGuesses[i];
 	}
-	temp = totalGuesses / correct;
-    temp = round(temp, 1);
+    if (correct > 0) {
+        temp = totalGuesses / correct;
+        temp = round(temp, 1);
+    }
+    else {
+        temp = "N/A"
+    }
     document.getElementById("averageGuesses").innerText = "Average guesses: " + String(temp);
     toggleHidden("resultCard");
-	attempts++;
+	attempt++;
 }
 
 function newGame() {
