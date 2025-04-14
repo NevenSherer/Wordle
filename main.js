@@ -88,62 +88,67 @@ function updateLetters() {
     }
 }
 
-function submitGuess() {
-    if (guess.length == 5) {
-        if (validGuesses.indexOf(guess) > -1) {
-            if (guesses.indexOf(guess) == -1) {
-                for (var i = 0; i < 5; i++) {
-                    if (!document.getElementById(String(guess.charAt(i).toUpperCase()) + "").classList.contains("keyboardLetterCorrect") && !document.getElementById(String(guess.charAt(i).toUpperCase()) + "").classList.contains("keyboardLetterIncorrect")) {
-                        document.getElementById(String(guess.charAt(i).toUpperCase()) + "").classList.add("keyboardLetterIncorrect")
-                    }
+function sleep(time) {
+    return new Promise(resolve => setTimeout(resolve, time));
+}
+
+function letterAt(positionAsString) {
+    return document.getElementById(positionAsString);
+}
+
+function triggerLetterFlipAnimations(start, guessCountAtStart) {
+    target = letterAt(guessCountAtStart + "-" + (start + 1))
+
+    target.style.animation = 'none';
+    target.offsetHeight;
+
+    target.style.animation = 'flip 400ms ease forwards';
+    
+    target.addEventListener('animationend', function handler() {
+        target.removeEventListener('animationend', handler);
+
+        if (start < 4) {
+            setLetterColors(start + 1, guessCountAtStart);
+        }
+        else {
+            guessCount++;
+            guesses.push(guess);
+            guess = "";
+        }
+    })
+}
+
+let currentLetter = null;
+
+function setLetterColors(letterPosition, guessCountAtStart) {
+    if (validGuesses.indexOf(guess) > -1) {
+        if (guesses.indexOf(guess) == -1) {
+            currentLetter = letterAt(guessCountAtStart + "-" + (letterPosition + 1))
+            currentLetter.classList.add("incorrect");
+            for (var j = 0; j < 5; j++) {
+                if (correctAnswer.charAt(j) == guess.charAt(letterPosition)) {
+                    currentLetter.classList.remove("incorrect");
+                    currentLetter.classList.add("somewhereElse")
                 }
-                for (var i = 0; i < 5; i++) {
-                    if (guess.charAt(i) == correctAnswer.charAt(i)) {
-                        document.getElementById(String(guess.charAt(i).toUpperCase()) + "").classList.add("keyboardLetterCorrect");
-                        document.getElementById(String(guess.charAt(i).toUpperCase()) + "").classList.remove("keyboardLetterIncorrect");
-                        document.getElementById(String(guess.charAt(i).toUpperCase()) + "").classList.remove("keyboardLetterSomewhereElse");
-                    }
-                    else {
-                        for (var j = 0; j < 5; j++) {
-                            if (guess.charAt(i) == correctAnswer.charAt(j) && !document.getElementById(String(correctAnswer.charAt(i).toUpperCase()) + "").classList.contains("keyboardLetterCorrect")) {
-                                document.getElementById(String(guess.charAt(i).toUpperCase()) + "").classList.add("keyboardLetterSomewhereElse");
-                                document.getElementById(String(guess.charAt(i).toUpperCase()) + "").classList.remove("keyboardLetterIncorrect");
-                            }
-                        }
-                    }
+            }
+            if (correctAnswer.charAt(letterPosition) == guess.charAt(letterPosition)) {
+                currentLetter.classList.remove("incorrect");
+                if (currentLetter.classList.contains("somewhereElse")) {
+                    currentLetter.classList.remove("somewhereElse");
                 }
-                for (var i = 0; i < 5; i++) {
-                    document.getElementById(guessCount + "-" + (i + 1)).classList.toggle("incorrect");
-                    document.getElementById(guessCount + "-" + (i + 1)).classList.remove("default");
-                }
-                for (var i = 0; i < guess.length; i++) {
-                    if (guess.charAt(i) == correctAnswer.charAt(i)) {
-                        document.getElementById(guessCount + "-" + (i + 1)).classList.add("correct");
-                        document.getElementById(guessCount + "-" + (i + 1)).classList.remove("incorrect");
-                        document.getElementById(guessCount + "-" + (i + 1)).innerText = guess.charAt(i);
-                    }
-                    else {
-                        for (var j = 0; j < guess.length; j++) {
-                            if (guess.charAt(i) == correctAnswer.charAt(j)) {
-                                document.getElementById(guessCount + "-" + (i + 1)).classList.add("somewhereElse");
-                                document.getElementById(guessCount + "-" + (i + 1)).classList.remove("incorrect");
-                                document.getElementById(guessCount + "-" + (i + 1)).innerText = guess.charAt(i);
-                            }
-                        }
-                        for (var j = 0; j < guess.length; j++) {
-                            if (document.getElementById(guessCount + "-" + (i + 1)).classList.contains("default")) {
-                                document.getElementById(guessCount + "-" + (i + 1)).classList.add("incorrect");
-                                document.getElementById(guessCount + "-" + (i + 1)).classList.remove("default");
-                                document.getElementById(guessCount + "-" + (i + 1)).innerText = guess.charAt(i);
-                            }
-                        }
-                    }
-                }
-                guessCount++;
-                guesses.push(guess);
-                guess = "";
+                currentLetter.classList.add("correct");
+            }
+
+            if (letterPosition < 5) {
+                triggerLetterFlipAnimations(letterPosition, guessCountAtStart);
             }
         }
+    }
+}
+
+function submitGuess() {
+    if (guess.length == 5) {
+        setLetterColors(0, guessCount);
     }
     if (guesses[guesses.length - 1] == correctAnswer) {
         numberOfGuesses.push(guessCount - 1);
@@ -223,7 +228,7 @@ function flipLetter() {
     var letters = document.getElementsByClassName("guess" + guessCount);
     var lettersArray = Array.from(letters);
     lettersArray.map(function (letter, i) {
-      letter.classList.add("flip");
-      letter.style.animationDelay = `${i * 100}ms`;
+        letter.classList.add("flip");
+        letter.style.animationDelay = `${i * 100}ms`;
     });
   }

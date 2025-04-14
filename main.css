@@ -228,7 +228,7 @@ canvas {
     flex: 0.5;
 }
 .flip {
-    animation: flip 500ms ease forwards;
+    animation: flip 400ms ease forwards;
 }
 @keyframes flip {
     0% {
