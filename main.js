@@ -104,52 +104,76 @@ function triggerLetterFlipAnimations(start, guessCountAtStart) {
 
     target.style.animation = 'flip 400ms ease forwards';
     
-    target.addEventListener('animationend', function handler() {
-        target.removeEventListener('animationend', handler);
+    target.addEventListener('animationstart', function handler() {
+        target.removeEventListener('animationstart', handler);
 
-        if (start < 4) {
-            setLetterColors(start + 1, guessCountAtStart);
+        if (start < 5) {
+            setTimeout(() => {
+                setLetterColors(start, guessCountAtStart);
+                updateKeyboard(target);
+                if (start < 4) {
+                    triggerLetterFlipAnimations(start + 1, guessCountAtStart)
+                }
+            }, 200);
         }
-        else {
-            guessCount++;
-            guesses.push(guess);
-            guess = "";
-        }
-    })
+    });
 }
 
-let currentLetter = null;
+function shakeInvalidAnswer() {
+    target = document.getElementById("guess" + guessCount);
+
+    target.style.animation = 'none';
+    target.offsetHeight;
+
+    target.style.animation = 'shake 100ms ease forwards'
+}
+
+function updateKeyboard(guessLetter) {
+    letter = document.getElementById(guessLetter.innerText.toUpperCase());
+    if (guessLetter.classList.contains("correct")) {
+        letter.classList.add("keyboardLetterCorrect");
+    }
+    else if (guessLetter.classList.contains("somewhereElse")) {
+        letter.classList.add("keyboardLetterSomewhereElse")
+    }
+    else {
+        letter.classList.add("keyboardLetterIncorrect");
+    }
+}
 
 function setLetterColors(letterPosition, guessCountAtStart) {
-    if (validGuesses.indexOf(guess) > -1) {
-        if (guesses.indexOf(guess) == -1) {
-            currentLetter = letterAt(guessCountAtStart + "-" + (letterPosition + 1))
-            currentLetter.classList.add("incorrect");
-            for (var j = 0; j < 5; j++) {
-                if (correctAnswer.charAt(j) == guess.charAt(letterPosition)) {
-                    currentLetter.classList.remove("incorrect");
-                    currentLetter.classList.add("somewhereElse")
-                }
-            }
-            if (correctAnswer.charAt(letterPosition) == guess.charAt(letterPosition)) {
-                currentLetter.classList.remove("incorrect");
-                if (currentLetter.classList.contains("somewhereElse")) {
-                    currentLetter.classList.remove("somewhereElse");
-                }
-                currentLetter.classList.add("correct");
-            }
-
-            if (letterPosition < 5) {
-                triggerLetterFlipAnimations(letterPosition, guessCountAtStart);
-            }
+    
+    currentLetter = letterAt(guessCountAtStart + "-" + (letterPosition + 1))
+    currentLetter.classList.add("incorrect");
+    for (var j = 0; j < 5; j++) {
+        if (correctAnswer.charAt(j) == guess.charAt(letterPosition)) {
+            currentLetter.classList.remove("incorrect");
+            currentLetter.classList.add("somewhereElse")
         }
+    }
+    if (correctAnswer.charAt(letterPosition) == guess.charAt(letterPosition)) {
+        currentLetter.classList.remove("incorrect");
+        if (currentLetter.classList.contains("somewhereElse")) {
+            currentLetter.classList.remove("somewhereElse");
+        }
+        currentLetter.classList.add("correct");
+    }
+
+    if (letterPosition >= 4) {
+        guesses.push(guess);
+        guessCount++;
+        guess = "";
     }
 }
 
 function submitGuess() {
-    if (guess.length == 5) {
-        setLetterColors(0, guessCount);
+    if (guess.length == 5 && validGuesses.indexOf(guess) > -1 && guesses.indexOf(guess) == -1) {
+        triggerLetterFlipAnimations(0, guessCount);
     }
+    else {
+        shakeInvalidAnswer();
+    }
+
     if (guesses[guesses.length - 1] == correctAnswer) {
         numberOfGuesses.push(guessCount - 1);
         guess = "";
