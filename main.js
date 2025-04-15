@@ -181,6 +181,7 @@ function setLetterColors(letterPosition, guessCountAtStart) {
         guessCount++;
         guess = "";
         allowInput = true;
+        checkForGameEnd();
     }
 }
 
@@ -201,15 +202,7 @@ function guessAllowed() {
     return true;
 }
 
-function submitGuess() {
-    if (guess.length == 5 && validGuesses.indexOf(guess) > -1 && guesses.indexOf(guess) == -1 && guessAllowed()) {
-        allowInput = false;
-        triggerLetterFlipAnimations(0, guessCount);
-    }
-    else {
-        shakeInvalidAnswer();
-    }
-
+function checkForGameEnd() {
     if (guesses[guesses.length - 1] == correctAnswer) {
         numberOfGuesses.push(guessCount - 1);
         guess = "";
@@ -219,6 +212,18 @@ function submitGuess() {
     else if (guessCount > 6) {
         gameEnd();
     }
+}
+
+function submitGuess() {
+    if (guess.length == 5 && validGuesses.indexOf(guess) > -1 && guesses.indexOf(guess) == -1 && guessAllowed()) {
+        allowInput = false;
+        triggerLetterFlipAnimations(0, guessCount);
+    }
+    else {
+        shakeInvalidAnswer();
+    }
+
+    checkForGameEnd();
 }
 
 function gameEnd() {
@@ -240,6 +245,32 @@ function gameEnd() {
         temp = "N/A"
     }
     document.getElementById("averageGuesses").innerText = "Average guesses: " + String(temp);
+
+    let winsInOne = 0;
+    let winsInTwo = 0;
+    let winsInThree = 0;
+    let winsInFour = 0;
+    let winsInFive = 0;
+    let winsInSix = 0;
+    
+    for (var i = 0; i < numberOfGuesses.length; i++) {
+        if (numberOfGuesses[i] == 1) {winsInOne++;}
+        if (numberOfGuesses[i] == 2) {winsInTwo++;}
+        if (numberOfGuesses[i] == 3) {winsInThree++;}
+        if (numberOfGuesses[i] == 4) {winsInFour++;}
+        if (numberOfGuesses[i] == 5) {winsInFive++;}
+        if (numberOfGuesses[i] == 6) {winsInSix++;}
+    }
+
+    longestBar = Math.max(winsInOne, winsInTwo, winsInThree, winsInFour, winsInFive, winsInSix);
+
+    document.getElementById("bar1").style.width = String((winsInOne / longestBar) * 90) + "%";
+    document.getElementById("bar2").style.width = String((winsInTwo / longestBar) * 90) + "%";
+    document.getElementById("bar3").style.width = String((winsInThree / longestBar) * 90) + "%";
+    document.getElementById("bar4").style.width = String((winsInFour / longestBar) * 90) + "%";
+    document.getElementById("bar5").style.width = String((winsInFive / longestBar) * 90) + "%";
+    document.getElementById("bar6").style.width = String((winsInSix / longestBar) * 90) + "%";
+
     toggleHidden("resultCard");
 	attempt++;
 }
@@ -263,6 +294,7 @@ function newGame() {
 			document.getElementById((i + 1) + "-" + (j + 1)).innerText = "";
 		}
 	}
+
     var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
     for (var i = 0; i < 26; i++) {
         if (document.getElementById(alphabet[i].toUpperCase()).classList.contains("keyboardLetterCorrect")) {
@@ -275,6 +307,7 @@ function newGame() {
             document.getElementById(alphabet[i].toUpperCase()).classList.remove("keyboardLetterSomewhereElse");
         }
     }
+
 	guesses = [];
 	guessCount = 1;
 	correctAnswer = possibleAnswers[Math.floor(Math.random() * possibleAnswers.length)];

@@ -269,6 +269,33 @@ input:checked + .hardModeButton:before {
     font-weight: 850;
     z-index: 100;
 }
+.guessDistribution {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+.attemptCounter {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: left;
+}
+.attemptCounterLabel {
+    margin-left: 0;
+    margin-right: 5px;
+    margin-top: 2px;
+    margin-bottom: 0;
+}
+.guessBar {
+    position: relative;
+    margin-left: 0;
+    margin-top: 2px;
+    margin-right: 0;
+    margin-bottom: 0;
+    width: 0%;
+    height: 1rem;
+    background-color: #6AAA64;
+    z-index: 100;
+}
 .keyboardLetters {
     background-color: #d3d6da;
     font-size: 1.25em;
