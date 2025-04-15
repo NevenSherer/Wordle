@@ -180,7 +180,8 @@ canvas {
 }
 .stats {
     position: relative;
-    display: block;
+    display: flex;
+    margin-top: 3rem;
 }
 .gamesPlayed {
     flex: 1;
@@ -190,6 +191,68 @@ canvas {
 }
 .averageGuesses {
     flex: 1;
+}
+.settings {
+    position: relative;
+    margin-top: 1rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    display: flex;
+    justify-content: space-between;
+}
+.hardMode {
+    display: flexbox;
+}
+.hardModeToggle {
+    position: relative;
+    display: flexbox;
+    transform: translate(0, 15px);
+    width: 28px;
+    height: 15px;
+}
+.hardModeToggle input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.hardModeButton {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #787c7e;
+    -webkit-transition: .2s;
+    transition: .2s;
+}
+.hardModeButton:before {
+    position: absolute;
+    content: "";
+    height: 13px;
+    width: 13px;
+    left: 1px;
+    bottom: 1px;
+    background-color: white;
+    -webkit-transition: .2s;
+    transition: .2s;
+}
+input:checked + .hardModeButton {
+    background-color: #6AAA64;
+}
+input:focus + .hardModeButton {
+    box-shadow: 0 0 1px #6AAA64;
+}
+input:checked + .hardModeButton:before {
+    -webkit-transform: translateX(13px);
+    -ms-transform: translateX(13px);
+    transform: translateX(13px);
+}
+.hardModeButton.round {
+    border-radius: 34px;
+}
+.hardModeButton.round:before {
+    border-radius: 50%;
 }
 .closeMenu {
     position: absolute;

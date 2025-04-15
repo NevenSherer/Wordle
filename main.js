@@ -42,41 +42,57 @@ correctAnswer = correctAnswer.toUpperCase();
 var guessCount = 1;
 var guesses = ["does not count as a guess"];
 const guessInput = document.getElementById("guessInput");
-
 var guess = "";
+var guessesContain = [];
+var lettersCorrect = [" ", " ", " ", " ", " "];
+var allowInput = true;
+
 window.addEventListener('keydown', (event) => {
     const inputChar = event.key;
     
-    if (inputChar == 'Backspace') {
-        guess = guess.slice(0, -1);
-    }
-    else if (inputChar == 'Enter') {
-        if (guess.length == 5) {
-            submitGuess();
+    if (allowInput) {
+        if (inputChar == 'Backspace') {
+            guess = guess.slice(0, -1);
         }
-    }
-    else if (inputChar.length == 1 && guess.length < 5 && inputChar !== " ") {
-        guess += inputChar.toUpperCase();
-    }
+        else if (inputChar == 'Enter') {
+            if (guess.length == 5) {
+                submitGuess();
+            }
+        }
+        else if (inputChar.length == 1 && guess.length < 5 && inputChar !== " ") {
+            guess += inputChar.toUpperCase();
+        }
 
-    updateLetters();
+        updateLetters();
+    }
+});
+
+window.addEventListener('load', () => {
+    hardModeSwitch = document.getElementById("hardModeTrueFalse");
+    hardModeSwitch.addEventListener('change', (event) => {
+        var currentHardMode = document.getElementById("hardModeTrueFalse");
+        if (currentHardMode.checked && guessCount > 1) {
+            currentHardMode.checked = !currentHardMode.checked;
+        }
+    });
 });
 
 function screenKeyboardInput(button) {
-    if (button == 'Backspace') {
-        guess = guess.slice(0, -1);
-    }
-    else if (button == 'Enter') {
-        if (guess.length == 5) {
-            submitGuess();
+    if (allowInput) {
+        if (button == 'Backspace') {
+            guess = guess.slice(0, -1);
         }
-    }
-    else if (button.length == 1 && guess.length < 5 && button !== " ") {
-        guess += button.toUpperCase();
-    }
+        else if (button == 'Enter') {
+            if (guess.length == 5) {
+                submitGuess();
+            }
+        }
+        else if (button.length == 1 && guess.length < 5 && button !== " ") {
+            guess += button.toUpperCase();
+        }
 
-    updateLetters();
-    console.log(button);
+        updateLetters();
+    }
 }
 
 function updateLetters() {
@@ -149,25 +165,45 @@ function setLetterColors(letterPosition, guessCountAtStart) {
         if (correctAnswer.charAt(j) == guess.charAt(letterPosition)) {
             currentLetter.classList.remove("incorrect");
             currentLetter.classList.add("somewhereElse")
+            guessesContain.push(guess.charAt(letterPosition));
         }
     }
     if (correctAnswer.charAt(letterPosition) == guess.charAt(letterPosition)) {
         currentLetter.classList.remove("incorrect");
-        if (currentLetter.classList.contains("somewhereElse")) {
-            currentLetter.classList.remove("somewhereElse");
-        }
+        currentLetter.classList.remove("somewhereElse");
         currentLetter.classList.add("correct");
+        guessesContain.pop(guessesContain[guessesContain.indexOf(guess.charAt(letterPosition))])
+        lettersCorrect[letterPosition] = guess.charAt(letterPosition);
     }
 
     if (letterPosition >= 4) {
         guesses.push(guess);
         guessCount++;
         guess = "";
+        allowInput = true;
     }
 }
 
+function guessAllowed() {
+    hardMode = document.getElementById("hardModeTrueFalse").checked;
+
+    if (hardMode) {
+        for (var i = 0; i < guessesContain.length; i++) {
+            if (guess.indexOf(guessesContain[i]) == -1) {
+                return false;
+            }
+            if (guess[i] !== lettersCorrect[i] && lettersCorrect[i] != " ") {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
 function submitGuess() {
-    if (guess.length == 5 && validGuesses.indexOf(guess) > -1 && guesses.indexOf(guess) == -1) {
+    if (guess.length == 5 && validGuesses.indexOf(guess) > -1 && guesses.indexOf(guess) == -1 && guessAllowed()) {
+        allowInput = false;
         triggerLetterFlipAnimations(0, guessCount);
     }
     else {
@@ -210,6 +246,8 @@ function gameEnd() {
 
 function newGame() {
 	toggleHidden("resultCard");
+    guessesContain = [];
+    lettersCorrect = [" ", " ", " ", " ", " "];
 	for (var i = 0; i < 6; i++) {
 		for (var j = 0; j < 5; j++) {
 			if (document.getElementById((i + 1) + "-" + (j + 1)).classList.contains("incorrect")) {

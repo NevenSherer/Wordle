@@ -166,9 +166,16 @@
                     <button class="closeMenu" onclick="toggleHidden('resultCard')">X</button>
                 </div>
                 <div class="stats">
-                    <p id="gamesPlayed" class="gamesPlayed">Games played: 0</p>
-                    <p id="winRate" class="winRate">Percentage of games won: N/A</p flip>
-                    <p id="averageGuesses" class="averageGuesses">Average guesses: N/A</p>
+                    <p id="gamesPlayed" class="gamesPlayed">Games played: <br>0</p>
+                    <p id="winRate" class="winRate">Games won: <br>N/A</p>
+                    <p id="averageGuesses" class="averageGuesses">Average guesses: <br>N/A</p>
+                </div>
+                <div class="settings">
+                    <p id="hardMode" class="hardMode">Hard Mode: </p>
+                    <label class="hardModeToggle">
+                        <input type="checkbox" id="hardModeTrueFalse" unchecked>
+                        <span class="hardModeButton round"></span>
+                    </label>
                 </div>
                 <button class="newGame" onclick="newGame()">New Game</button>
             </div>
