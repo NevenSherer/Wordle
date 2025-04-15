@@ -271,12 +271,14 @@ function gameEnd() {
     document.getElementById("bar5").style.width = String((winsInFive / longestBar) * 90) + "%";
     document.getElementById("bar6").style.width = String((winsInSix / longestBar) * 90) + "%";
 
+    toggleHidden("newGame");
     toggleHidden("resultCard");
 	attempt++;
 }
 
 function newGame() {
 	toggleHidden("resultCard");
+    toggleHidden("newGame")
     guessesContain = [];
     lettersCorrect = [" ", " ", " ", " ", " "];
 	for (var i = 0; i < 6; i++) {
@@ -310,7 +312,13 @@ function newGame() {
 
 	guesses = [];
 	guessCount = 1;
-	correctAnswer = possibleAnswers[Math.floor(Math.random() * possibleAnswers.length)];
+    if (document.getElementById("superHardModeTrueFalse").checked) {
+	    correctAnswer = validGuesses[Math.floor(Math.random() * validGuesses.length)];
+    }
+    else {
+        correctAnswer = possibleAnswers[Math.floor(Math.random() * possibleAnswers.length)];
+    }
+
 	correctAnswer = correctAnswer.toUpperCase();
 	guesses = ["does not count as a guess"];
 }
@@ -318,12 +326,3 @@ function newGame() {
 function toggleHidden(target) {
     document.getElementById(target).classList.toggle("hidden");
 }
-
-function flipLetter() {
-    var letters = document.getElementsByClassName("guess" + guessCount);
-    var lettersArray = Array.from(letters);
-    lettersArray.map(function (letter, i) {
-        letter.classList.add("flip");
-        letter.style.animationDelay = `${i * 100}ms`;
-    });
-  }

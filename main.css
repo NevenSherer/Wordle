@@ -197,18 +197,30 @@ canvas {
     margin-top: 1rem;
     margin-left: 2rem;
     margin-right: 2rem;
-    display: flex;
-    justify-content: space-between;
 }
 .hardMode {
-    display: flexbox;
+    display: flex;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    transform: translate(0, 2px);
+}
+.settingRow {
+    width: 100%;
+    display: flex;
+    position: relative;
+    justify-content: space-between;
 }
 .hardModeToggle {
     position: relative;
-    display: flexbox;
-    transform: translate(0, 15px);
+    display: flex;
     width: 28px;
     height: 15px;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
 }
 .hardModeToggle input { 
     opacity: 0;

@@ -197,13 +197,22 @@
                     </div>
                 </div>
                 <div class="settings">
-                    <p id="hardMode" class="hardMode">Hard Mode: </p>
-                    <label class="hardModeToggle">
-                        <input type="checkbox" id="hardModeTrueFalse" unchecked>
-                        <span class="hardModeButton round"></span>
-                    </label>
+                    <div class="settingRow">
+                        <p id="hardMode" class="hardMode">Hard Mode: </p>
+                        <label class="hardModeToggle">
+                            <input type="checkbox" id="hardModeTrueFalse" unchecked>
+                            <span class="hardModeButton round"></span>
+                        </label>
+                    </div>
+                    <div class="settingRow">
+                        <p id="hardMode" class="hardMode">Super Hard Mode: </p>
+                        <label class="hardModeToggle">
+                            <input type="checkbox" id="superHardModeTrueFalse" unchecked>
+                            <span class="hardModeButton round"></span>
+                        </label>
+                    </div>
                 </div>
-                <button class="newGame" onclick="newGame()">New Game</button>
+                <button id="newGame" class="newGame hidden" onclick="newGame()">Next Game</button>
             </div>
         </div>
     </body>
