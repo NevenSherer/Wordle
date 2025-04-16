@@ -355,12 +355,11 @@ function shareResults() {
 
 function setLastGuessBarToGreen() {
     lastGuessNumber = numberOfGuesses[numberOfGuesses.length - 1];
-    console.log("yup")
     if (lastGuessNumber == 1) {document.getElementById("bar1").style.backgroundColor = "#6AAA64";}
     else if (lastGuessNumber == 2) {document.getElementById("bar2").style.backgroundColor = "#6AAA64";}
-    else if (lastGuessNumber == 2) {document.getElementById("bar3").style.backgroundColor = "#6AAA64";}
-    else if (lastGuessNumber == 2) {document.getElementById("bar4").style.backgroundColor = "#6AAA64";}
-    else if (lastGuessNumber == 2) {document.getElementById("bar5").style.backgroundColor = "#6AAA64";}
+    else if (lastGuessNumber == 3) {document.getElementById("bar3").style.backgroundColor = "#6AAA64";}
+    else if (lastGuessNumber == 4) {document.getElementById("bar4").style.backgroundColor = "#6AAA64";}
+    else if (lastGuessNumber == 5) {document.getElementById("bar5").style.backgroundColor = "#6AAA64";}
     else {document.getElementById("bar6").style.backgroundColor = "#6AAA64";}
 }
 
