@@ -110,6 +110,7 @@ canvas {
     height: 50%;
     background-color: #FFFFFF;
     text-align: center;
+    border-radius: 1rem;
     font: 300;
 }
 .hidden {
@@ -291,10 +292,14 @@ input:checked + .hardModeButton:before {
 .newGame {
     margin-top: 1rem;
     margin-left: 0;
-    margin-right: 0;
+    margin-right: 2rem;
     margin-bottom: 0;
-    background-color: rgba(255, 255, 255, 0);
+    height: 2.3rem;
+    width: 7rem;
+    background-color: #6AAA64;
+    color: #fff;
     border: none;
+    border-radius: 0.8rem;
     font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
     font-weight: 750;
 }

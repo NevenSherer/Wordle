@@ -46,6 +46,9 @@ var guess = "";
 var guessesContain = [];
 var lettersCorrect = [" ", " ", " ", " ", " "];
 var allowInput = true;
+var share = [];
+var hardMode;
+var superHardMode;
 
 window.addEventListener('keydown', (event) => {
     const inputChar = event.key;
@@ -71,12 +74,31 @@ window.addEventListener('keydown', (event) => {
 });
 
 window.addEventListener('load', () => {
-    hardModeSwitch = document.getElementById("hardModeTrueFalse");
-    hardModeSwitch.addEventListener('change', (event) => {
-        var currentHardMode = document.getElementById("hardModeTrueFalse");
+    var hardModeSwitch = document.getElementById("hardModeTrueFalse");
+    var currentHardMode = document.getElementById("hardModeTrueFalse");
+    hardModeSwitch.addEventListener('change', () => {
+        currentHardMode = document.getElementById("hardModeTrueFalse");
         if (currentHardMode.checked && guessCount > 1) {
             currentHardMode.checked = !currentHardMode.checked;
+            alert("You need to enable this at the beginning of a game");
         }
+        if (!currentHardMode.checked && currentSuperHardMode.checked) {
+            currentSuperHardMode.checked = !currentSuperHardMode.checked;
+        }
+        currentHardMode = document.getElementById("hardModeTrueFalse");
+    });
+
+    var superHardModeSwitch = document.getElementById("superHardModeTrueFalse");
+    var currentSuperHardMode = document.getElementById("superHardModeTrueFalse");
+    superHardModeSwitch.addEventListener('change', () => {
+        if (!currentHardMode.checked && guessCount == 1) {
+            currentHardMode.checked = !currentHardMode.checked;
+        }
+        else if (guessCount > 1 && !superHardMode) {
+            alert("This needs hard mode to be enabled and that must be turned on before a round\nThis will choose from more obscure words");
+            currentSuperHardMode.checked = !currentSuperHardMode.checked;
+        }
+        currentSuperHardMode = document.getElementById("superHardModeTrueFalse");
     });
 
     document.getElementById("darkenBackground").addEventListener('click', () => {
@@ -154,6 +176,8 @@ function shakeInvalidAnswer() {
 function updateKeyboard(guessLetter) {
     letter = document.getElementById(guessLetter.innerText.toUpperCase());
     if (guessLetter.classList.contains("correct")) {
+        letter.classList.remove("keyboardLetterSomewhereElse")
+        letter.classList.remove("keyboardLetterIncorrect")
         letter.classList.add("keyboardLetterCorrect");
     }
     else if (guessLetter.classList.contains("somewhereElse")) {
@@ -165,17 +189,20 @@ function updateKeyboard(guessLetter) {
 }
 
 function setLetterColors(letterPosition, guessCountAtStart) {
-    
+    share[letterPosition + ((guessCountAtStart - 1) * 5)] = "⬜";
     currentLetter = letterAt(guessCountAtStart + "-" + (letterPosition + 1))
     currentLetter.classList.add("incorrect");
+
     for (var j = 0; j < 5; j++) {
         if (correctAnswer.charAt(j) == guess.charAt(letterPosition)) {
+            share[letterPosition + ((guessCountAtStart - 1) * 5)] = "🟨";
             currentLetter.classList.remove("incorrect");
             currentLetter.classList.add("somewhereElse")
             guessesContain.push(guess.charAt(letterPosition));
         }
     }
     if (correctAnswer.charAt(letterPosition) == guess.charAt(letterPosition)) {
+        share[letterPosition + ((guessCountAtStart - 1) * 5)] = "🟩";
         currentLetter.classList.remove("incorrect");
         currentLetter.classList.remove("somewhereElse");
         currentLetter.classList.add("correct");
@@ -196,6 +223,7 @@ function setLetterColors(letterPosition, guessCountAtStart) {
 
 function guessAllowed() {
     hardMode = document.getElementById("hardModeTrueFalse").checked;
+    superHardMode = document.getElementById("superHardModeTrueFalse").checked;
 
     if (hardMode) {
         for (var i = 0; i < guessesContain.length; i++) {
@@ -273,20 +301,72 @@ function gameEnd() {
 
     longestBar = Math.max(winsInOne, winsInTwo, winsInThree, winsInFour, winsInFive, winsInSix);
 
-    document.getElementById("bar1").style.width = String((winsInOne / longestBar) * 90) + "%";
-    document.getElementById("bar2").style.width = String((winsInTwo / longestBar) * 90) + "%";
-    document.getElementById("bar3").style.width = String((winsInThree / longestBar) * 90) + "%";
-    document.getElementById("bar4").style.width = String((winsInFour / longestBar) * 90) + "%";
-    document.getElementById("bar5").style.width = String((winsInFive / longestBar) * 90) + "%";
-    document.getElementById("bar6").style.width = String((winsInSix / longestBar) * 90) + "%";
+    scaleBarAndSetColor("bar1", winsInOne, longestBar);
+    scaleBarAndSetColor("bar2", winsInTwo, longestBar);
+    scaleBarAndSetColor("bar3", winsInThree, longestBar);
+    scaleBarAndSetColor("bar4", winsInFour, longestBar);
+    scaleBarAndSetColor("bar5", winsInFive, longestBar);
+    scaleBarAndSetColor("bar6", winsInSix, longestBar);
+
+    setLastGuessBarToGreen();
 
     toggleHidden("newGame");
+    toggleHidden("shareButton");
     toggleHidden("resultCard");
 	attempt++;
 }
 
+function generateShare() {
+    textOutput = "";
+
+    textOutput = textOutput + "Wordle " + numberOfGuesses[numberOfGuesses.length - 1] + "/6";
+    if (hardMode) {
+        textOutput = textOutput + "*";
+    }
+    if (superHardMode) {
+        textOutput = textOutput + "*"
+    }
+    textOutput = textOutput + "\n\n"
+
+    for (var i = 0; i < (share.length / 5); i++) {
+        textOutput = textOutput + share[(i * 5)];
+        textOutput = textOutput + share[(i * 5) + 1];
+        textOutput = textOutput + share[(i * 5) + 2];
+        textOutput = textOutput + share[(i * 5) + 3];
+        textOutput = textOutput + share[(i * 5) + 4];
+        textOutput = textOutput + "\n";
+    }
+
+    return textOutput;
+}
+
+function scaleBarAndSetColor(barName, barLength, longestBar) {
+    document.getElementById(barName).style.width = String((barLength / longestBar) * 90) + "%";
+    document.getElementById(barName).style.backgroundColor = "#787c7e";
+}
+
+function shareResults() {
+    var results = generateShare();
+    
+    navigator.clipboard.writeText(results);
+    
+    alert("Results copied to clipboard");
+}
+
+function setLastGuessBarToGreen() {
+    lastGuessNumber = numberOfGuesses[numberOfGuesses.length - 1];
+    console.log("yup")
+    if (lastGuessNumber == 1) {document.getElementById("bar1").style.backgroundColor = "#6AAA64";}
+    else if (lastGuessNumber == 2) {document.getElementById("bar2").style.backgroundColor = "#6AAA64";}
+    else if (lastGuessNumber == 2) {document.getElementById("bar3").style.backgroundColor = "#6AAA64";}
+    else if (lastGuessNumber == 2) {document.getElementById("bar4").style.backgroundColor = "#6AAA64";}
+    else if (lastGuessNumber == 2) {document.getElementById("bar5").style.backgroundColor = "#6AAA64";}
+    else {document.getElementById("bar6").style.backgroundColor = "#6AAA64";}
+}
+
 function newGame() {
 	toggleHidden("resultCard");
+    toggleHidden("shareButton");
     toggleHidden("newGame")
     guessesContain = [];
     lettersCorrect = [" ", " ", " ", " ", " "];
@@ -320,6 +400,7 @@ function newGame() {
     }
 
 	guesses = [];
+    share = [];
 	guessCount = 1;
     if (document.getElementById("superHardModeTrueFalse").checked) {
 	    correctAnswer = validGuesses[Math.floor(Math.random() * validGuesses.length)];
