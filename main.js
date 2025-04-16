@@ -59,6 +59,9 @@ window.addEventListener('keydown', (event) => {
                 submitGuess();
             }
         }
+        else if (inputChar == 'Escape') {
+            toggleHidden("resultCard")
+        }
         else if (inputChar.length == 1 && guess.length < 5 && inputChar !== " ") {
             guess += inputChar.toUpperCase();
         }
@@ -74,6 +77,10 @@ window.addEventListener('load', () => {
         if (currentHardMode.checked && guessCount > 1) {
             currentHardMode.checked = !currentHardMode.checked;
         }
+    });
+
+    document.getElementById("darkenBackground").addEventListener('click', () => {
+        toggleHidden("resultCard")
     });
 });
 
@@ -181,7 +188,9 @@ function setLetterColors(letterPosition, guessCountAtStart) {
         guessCount++;
         guess = "";
         allowInput = true;
-        checkForGameEnd();
+        setTimeout(() => {
+            checkForGameEnd();
+        }, 500);
     }
 }
 
@@ -229,10 +238,10 @@ function submitGuess() {
 function gameEnd() {
 	var temp;
 	temp = attempt;
-    document.getElementById("gamesPlayed").innerText = "Games played: " + String(temp);
+    document.getElementById("gamesPlayed").innerText = "Games played:\n" + String(temp);
 	temp = (correct / attempt) * 100;
     temp = round(temp, 1);
-    document.getElementById("winRate").innerText = "Percentage of games won: " + String(temp) + "%";
+    document.getElementById("winRate").innerText = "Percentage of games won:\n" + String(temp) + "%";
 	var totalGuesses = 0;
 	for (var i = 0; i < numberOfGuesses.length; i++) {
 		totalGuesses += numberOfGuesses[i];
@@ -244,7 +253,7 @@ function gameEnd() {
     else {
         temp = "N/A"
     }
-    document.getElementById("averageGuesses").innerText = "Average guesses: " + String(temp);
+    document.getElementById("averageGuesses").innerText = "Average guesses:\n" + String(temp);
 
     let winsInOne = 0;
     let winsInTwo = 0;

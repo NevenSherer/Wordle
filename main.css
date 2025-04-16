@@ -134,6 +134,9 @@ canvas {
     background-color: rgba(255, 255, 255, 0);
     font-weight: 750;
 }
+.menu:hover {
+    cursor: pointer;
+}
 .onScreenKeyboard {
     position: relative;
     display: block;
@@ -271,8 +274,9 @@ input:checked + .hardModeButton:before {
     left: 100%;
     padding-left: 0px;
     padding-right: 12px;
-    padding-top: 6px;
+    padding-top: 0;
     padding-bottom: 0px;
+    transform: rotate(180deg);
     transform: translate(-100%);
     background-color: rgba(255, 255, 255, 0);
     border: none;
@@ -280,6 +284,22 @@ input:checked + .hardModeButton:before {
     font-size: 2rem;
     font-weight: 850;
     z-index: 100;
+}
+.closeMenu:hover {
+    cursor: pointer;
+}
+.newGame {
+    margin-top: 1rem;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+    font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 750;
+}
+.newGame:hover {
+    cursor: pointer;
 }
 .guessDistribution {
     padding-left: 2rem;
