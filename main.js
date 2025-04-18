@@ -95,7 +95,7 @@ window.addEventListener('load', () => {
             currentHardMode.checked = !currentHardMode.checked;
         }
         else if (guessCount > 1 && !superHardMode) {
-            alert("This needs hard mode to be enabled and that must be turned on before a round\nThis will choose from more obscure words");
+            alert("This needs hard mode to be enabled and that must be turned on before a round\nHard mode chooses from more obscure words");
             currentSuperHardMode.checked = !currentSuperHardMode.checked;
         }
         currentSuperHardMode = document.getElementById("superHardModeTrueFalse");
