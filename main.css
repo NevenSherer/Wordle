@@ -387,3 +387,17 @@ input:checked + .hardModeButton:before {
         transform: translateX(0);
     }
 }
+.grow {
+    animation: grow 100ms ease forwards;
+}
+@keyframes grow {
+    0% {
+        transform: scale(100%);
+    }
+    50% {
+        transform: scale(115%);
+    }
+    100% {
+        transform: scale(100%);
+    }
+}

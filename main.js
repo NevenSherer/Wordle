@@ -67,6 +67,7 @@ window.addEventListener('keydown', (event) => {
         }
         else if (inputChar.length == 1 && guess.length < 5 && inputChar !== " ") {
             guess += inputChar.toUpperCase();
+            triggerLetterScalingAnimation(guess.length, guessCount);
         }
 
         updateLetters();
@@ -122,6 +123,15 @@ function screenKeyboardInput(button) {
 
         updateLetters();
     }
+}
+
+function triggerLetterScalingAnimation(index, guessCountAtStart) {
+    target = letterAt(guessCountAtStart + "-" + (index))
+
+    target.style.animation = 'none';
+    target.offsetHeight;
+
+    target.style.animation = 'grow 100ms ease forwards';
 }
 
 function updateLetters() {
