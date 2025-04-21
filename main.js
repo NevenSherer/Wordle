@@ -143,10 +143,6 @@ function updateLetters() {
     }
 }
 
-function sleep(time) {
-    return new Promise(resolve => setTimeout(resolve, time));
-}
-
 function letterAt(positionAsString) {
     return document.getElementById(positionAsString);
 }
