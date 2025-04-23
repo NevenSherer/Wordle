@@ -119,6 +119,7 @@ function screenKeyboardInput(button) {
         }
         else if (button.length == 1 && guess.length < 5 && button !== " ") {
             guess += button.toUpperCase();
+            triggerLetterScalingAnimation(guess.length, guessCount);
         }
 
         updateLetters();
